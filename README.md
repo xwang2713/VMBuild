@@ -1,6 +1,3 @@
-# VMBuild
-HPCCSystems Virtual Machine Build
-
 
 VMBuild
 =======
