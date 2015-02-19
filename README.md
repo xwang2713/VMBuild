@@ -1,4 +1,3 @@
-
 VMBuild
 =======
 
@@ -38,8 +37,9 @@ Usage
     To build default 32bit Ubuntu VM:
        ./generate-vm-template.py --dest ~/VMbuildDir --json HPCCSystemsVM_GM_NM_WS.json
           --gm-version 5.0.2-1 --nm-version 5.0.2-1 --wssql-version 5.0.2-rc1 5.0.2-1 CE-Candidate-5.0.2
+
     To build 64bit Ubuntu VM:
-       ./generate-vm-template.py --json HPCCSystemsVM64_GM_NM_WS.json --dest ~/VMbuildDir64
+       ./generate-vm-template.py --json HPCCSystemsVM64_GM_NM_WS.json --dest ~/VMbuildDir64 
           --gm-version 5.0.2-1 --nm-version 5.0.2-1 --wssql-version 5.0.2-rc1 5.0.2-1 CE-Candidate-5.0.2
 
 

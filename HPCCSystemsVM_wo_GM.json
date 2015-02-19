@@ -1,0 +1,23 @@
+{
+    "stagingMethod": "ssh",
+    "staging": "staging-server",
+    "stagingUser": "hpccbuild",
+    "buildDir": "/u/tBuilds",
+    "baseName": "HPCCSystemsVM",
+    "packageBase": "hpccsystems-platform_community",
+    "packagePost": "precise_i386.deb",
+    "optional_packages": [],
+    "replace":{
+        "{{NAME}}": "name",
+        "{{PACKAGE}}": "package",
+        "{{VERSION}}": "version"
+    },
+    "templates": [
+        "build.sh.in",
+        "provision.sh.in",
+        "Vagrantfile.in"
+    ],
+    "extra_templates": [
+        { "packages": "Vagrantfile.in" }
+    ]
+}

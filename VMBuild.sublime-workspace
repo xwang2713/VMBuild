@@ -1,0 +1,681 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"p",
+				"projs"
+			],
+			[
+				"print",
+				"print_url"
+			],
+			[
+				"stat",
+				"status_code"
+			],
+			[
+				"fut",
+				"__future__  (module)"
+			],
+			[
+				"tr",
+				"try	Try/Except"
+			],
+			[
+				"b",
+				"buildLogging  (function)"
+			],
+			[
+				"run",
+				"runQuery"
+			],
+			[
+				"add_",
+				"add_parser"
+			],
+			[
+				"pro",
+				"property	@Property"
+			],
+			[
+				"pr",
+				"property	@Property"
+			],
+			[
+				"Key",
+				"KeyError  (class)"
+			],
+			[
+				"_",
+				"_config"
+			],
+			[
+				"ass",
+				"assnin	assertNotIn"
+			],
+			[
+				"as",
+				"asst	assertTrue"
+			],
+			[
+				"get",
+				"getFile"
+			],
+			[
+				"P",
+				"ProgressBar  (class)"
+			],
+			[
+				"with",
+				"width"
+			],
+			[
+				"de",
+				"decompress"
+			],
+			[
+				"strea",
+				"stream_decode_gzip"
+			],
+			[
+				"file",
+				"fileService"
+			],
+			[
+				"block",
+				"blocksz"
+			],
+			[
+				"list",
+				"listfile"
+			],
+			[
+				"decom",
+				"decompress"
+			],
+			[
+				"content",
+				"content-encoding"
+			],
+			[
+				"r",
+				"rem"
+			],
+			[
+				"pl",
+				"pluginExc"
+			],
+			[
+				"files",
+				"filesize_dl"
+			],
+			[
+				"__re",
+				"__repr__  (function)"
+			],
+			[
+				"url",
+				"urlparse"
+			],
+			[
+				"re",
+				"register_get"
+			],
+			[
+				"base",
+				"base_id"
+			],
+			[
+				"dump",
+				"dump  (function)"
+			],
+			[
+				"pack",
+				"packageInfo"
+			],
+			[
+				"dict",
+				"dictVer"
+			],
+			[
+				"e",
+				"e"
+			],
+			[
+				"bPLUGIN",
+				"bPLUGIN_LOG"
+			],
+			[
+				"M",
+				"MDEPS"
+			],
+			[
+				"depen",
+				"Dependency"
+			],
+			[
+				"PLU",
+				"PLUGIN_MDEPS"
+			],
+			[
+				"PL",
+				"PLUGIN_MDEPS"
+			],
+			[
+				"end",
+				"ENDFOREACH"
+			],
+			[
+				"PLUG",
+				"PLUGIN_DEFAULT_ARGS"
+			],
+			[
+				"Ws",
+				"WsWorkunits"
+			],
+			[
+				"def",
+				"defs	Method"
+			],
+			[
+				"wswork",
+				"wswork"
+			],
+			[
+				"ws",
+				"wswork"
+			],
+			[
+				"ur",
+				"urllib2"
+			],
+			[
+				"__ini",
+				"__initClient"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "HPCCSystemsVM.json",
+			"settings":
+			{
+				"buffer_size": 114,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 79.0,
+		"selected_items":
+		[
+			[
+				"new sn",
+				"z:AAAPackageDev: New Raw Snippet"
+			],
+			[
+				"task",
+				"Tasks: New document"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ssjso",
+				"Set Syntax: JSON"
+			],
+			[
+				"",
+				"Git: Commit history"
+			],
+			[
+				"pack",
+				"Package Control: Discover Packages"
+			],
+			[
+				"mini",
+				"View: Toggle Minimap"
+			],
+			[
+				"sideb",
+				"View: Toggle Side Bar"
+			],
+			[
+				"pa",
+				"Package Control: List Packages"
+			],
+			[
+				"sspy",
+				"Set Syntax: Python"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 588.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/phschwartz/src/tBuilds/pyjenkins.py",
+		"/home/phschwartz/src/tBuilds/pyjenkins2.py",
+		"/home/phschwartz/src/HPCC-Platform/testing/regress/regress",
+		"/home/phschwartz/src/HPCC-Platform/testing/regress/hpcc/regression/regress.py",
+		"/home/phschwartz/src/HPCC-Platform/testing/regress/hpcc/util/ecl/file.py",
+		"/home/phschwartz/src/HPCC-Platform/testing/regress/hpcc/regression/suite.py",
+		"/home/phschwartz/src/HPCC-Platform/testing/regress/hpcc/common/report.py",
+		"/home/phschwartz/.config/sublime-text-2/Packages/User/Python-Property.sublime-snippet",
+		"/home/phschwartz/.config/sublime-text-2/Packages/Python/New-Property.sublime-snippet",
+		"/home/phschwartz/.config/sublime-text-2/Packages/Python/Python-Property.sublime-snippet",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/grammer/package.parsley",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/run.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/HPCC/package.py",
+		"/home/phschwartz/src/pluginExc/test.py",
+		"/home/phschwartz/src/pluginExc/HPCC/__init__.py",
+		"/home/phschwartz/src/pluginExc/HPCC/progressbar.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/api/views.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/api/__init__.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/HPCC/base.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/HPCC/build.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/api/utils.py",
+		"/home/phschwartz/src/tBuilds/btest.py",
+		"/home/phschwartz/src/tBuilds/HPCC-Build-Staging/src/HPCC/__init__.py",
+		"/home/phschwartz/src/tBuilds/builds.py",
+		"/home/phschwartz/src/tBuilds/test2.py",
+		"/home/phschwartz/src/tBuilds/package.parsley",
+		"/home/phschwartz/src/HPCC-Platform/plugins/pyembed/pyembed.cpp",
+		"/home/phschwartz/test/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/plugins/javaembed/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/plugins/v8embed/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/plugins/pyembed/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/plugins/Rembed/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/plugins/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/CMakeLists.txt",
+		"/home/phschwartz/src/HPCC-Platform/cmake_modules/commonSetup.cmake",
+		"/home/phschwartz/src/newregress/wsdl/testClient.py",
+		"/home/phschwartz/src/HPCC-Platform/plugins/Rembed/Rembed.cpp",
+		"/home/phschwartz/src/HPCC-Platform/plugins/javaembed/javaembed.cpp",
+		"/home/phschwartz/src/HPCC-Platform/cmake_modules/docMacros.cmake",
+		"/home/phschwartz/test.cmake",
+		"/usr/share/cmake-2.8/Modules/FindPythonLibs.cmake",
+		"/usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake",
+		"/home/phschwartz/src/HPCC-Platform/cmake_modules/FindV8.cmake",
+		"/home/phschwartz/src/newregress/ecltest/Modules/File_Builder.ecl",
+		"/home/phschwartz/src/newregress/ecltest/test.ecl",
+		"/home/phschwartz/src/newregress/ecltest/Modules/Variant.ecl",
+		"/home/phschwartz/src/newregress/ecltest/Modules/TestModule.ecl",
+		"/home/phschwartz/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/phschwartz/Dropbox/docs/console.py"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"platform",
+			"=",
+			"'",
+			"n",
+			"number",
+			"\n",
+			",\n",
+			"self.client(self"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"return self.client(self"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "HPCCSystemsVM.json",
+					"settings":
+					{
+						"buffer_size": 114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+								"URL",
+								"DAL",
+								"Field",
+								"Request",
+								"Response",
+								"Session",
+								"Cookie",
+								"T",
+								"A",
+								"B",
+								"BEAUTIFY",
+								"BODY",
+								"BR",
+								"BUTTON",
+								"CENTER",
+								"CAT",
+								"CODE",
+								"COL",
+								"COLGROUP",
+								"DIV",
+								"EM",
+								"EMBED",
+								"FIELDSET",
+								"FORM",
+								"H1",
+								"H2",
+								"H3",
+								"H4",
+								"H5",
+								"H6",
+								"HEAD",
+								"HR",
+								"HTML",
+								"HTTP",
+								"I",
+								"IFRAME",
+								"IMG",
+								"INPUT",
+								"LABEL",
+								"LEGEND",
+								"LI",
+								"LINK",
+								"OL",
+								"UL",
+								"MARKMIN",
+								"MENU",
+								"META",
+								"OBJECT",
+								"ON",
+								"OPTION",
+								"P",
+								"PRE",
+								"SCRIPT",
+								"OPTGROUP",
+								"SELECT",
+								"SPAN",
+								"STYLE",
+								"TABLE",
+								"TAG",
+								"TD",
+								"TEXTAREA",
+								"TH",
+								"THEAD",
+								"TBODY",
+								"TFOOT",
+								"TITLE",
+								"TR",
+								"TT",
+								"URL",
+								"XHTML",
+								"XML",
+								"xmlescape",
+								"embed64",
+								"CLEANUP",
+								"CRYPT",
+								"IS_ALPHANUMERIC",
+								"IS_DATE_IN_RANGE",
+								"IS_DATE",
+								"IS_DATETIME_IN_RANGE",
+								"IS_DATETIME",
+								"IS_DECIMAL_IN_RANGE",
+								"IS_EMAIL",
+								"IS_EMPTY_OR",
+								"IS_EXPR",
+								"IS_FLOAT_IN_RANGE",
+								"IS_IMAGE",
+								"IS_IN_DB",
+								"IS_IN_SET",
+								"IS_INT_IN_RANGE",
+								"IS_IPV4",
+								"IS_LENGTH",
+								"IS_LIST_OF",
+								"IS_LOWER",
+								"IS_MATCH",
+								"IS_EQUAL_TO",
+								"IS_NOT_EMPTY",
+								"IS_NOT_IN_DB",
+								"IS_NULL_OR",
+								"IS_SLUG",
+								"IS_STRONG",
+								"IS_TIME",
+								"IS_UPLOAD_FILENAME",
+								"IS_UPPER",
+								"IS_URL",
+								"db",
+								"crud",
+								"mail",
+								"request",
+								"response",
+								"session",
+								"service",
+								"auth",
+								"prettydate",
+								"plugins",
+								"SQLFORM",
+								"redirect",
+								"SQLDB",
+								"GQLDB",
+								"cache"
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 798.0
+	},
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"hpcc/p",
+				"src/HPCC/package.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

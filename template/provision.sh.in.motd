@@ -1,0 +1,82 @@
+export DEBIAN_FRONTEND=noninteractive
+apt-get update > /dev/null
+
+apt-get install -y libboost-regex1.46.1 libicu48 libxalan110 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base-core libv8-dev
+dpkg -i /vagrant/{{PACKAGE}}
+apt-get clean > /dev/null
+
+sed -e "s/interface=\*/interface=eth1/" /etc/HPCCSystems/environment.conf > /tmp/environment.conf
+mv /tmp/environment.conf /etc/HPCCSystems/environment.conf
+
+cat > /usr/local/bin/get-ip-address << EOM
+#!/bin/sh
+
+/sbin/ifconfig eth1 | grep "inet addr" | grep -v "127.0.0.1" | awk '{ print \$2 }' | awk -F: '{ print \$2 }'
+EOM
+chmod a+x /usr/local/bin/get-ip-address
+
+cat > /etc/issue-standard << EOM
+Welcome to the HPCC Platform VM Version {{VERSION}}!
+
+Please use the following credentials to login to the shell.
+
+User: hpccdemo
+Pass: hpccdemo
+
+(This user has full passwordless sudo rights.)
+
+Please login to obtain the ECLWatch IP address.
+
+
+EOM
+
+
+cat > /etc/network/if-up.d/issue << EOM
+#!/bin/sh
+if [ "\$METHOD" = loopback ]; then
+    exit 0
+fi
+
+# Only run from ifup.
+if [ "\$MODE" != start ]; then
+    exit 0
+fi
+
+IP=\`/usr/local/bin/get-ip-address\`
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/issue
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/motd
+
+hostname HPCC-Platform
+EOM
+chmod a+x /etc/network/if-up.d/issue
+
+cat > /etc/rc.local << EOM
+#!/bin/sh -e
+dhclient eth1
+MODE="start"
+service hpcc-init start
+exit 0
+EOM
+
+# Add EclWatch URL to Message of the day
+( cat <<'EOP'
+
+printf "\nEclWatch: http://$(/usr/local/bin/get-ip-address):8010"
+printf "\nVerify the above address matches the eth1 ip address by running ifconfig.\n"
+
+EOP
+) >> /etc/update-motd.d/10-help-text
+
+
+useradd -s /bin/bash -p "\$6\$TlToC1Ia\$rMHaPDzlX8RIn8t57vFClDpELs7/OuCvzzV.uuIFFOUhftDYaq7Z/VXOINuk1amkDGKo87A/bHzDzeyNOthRE1" hpccdemo
+mkdir /home/hpccdemo
+chown -R hpccdemo:hpccdemo /home/hpccdemo
+
+# Set up sudo
+( cat <<'EOP'
+%hpccdemo ALL=NOPASSWD:ALL
+EOP
+) > /tmp/hpccdemo
+chmod 0440 /tmp/hpccdemo
+mv /tmp/hpccdemo /etc/sudoers.d/
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+curdir=`pwd`
+mkdir hld
+
+rm -rf {{NAME}}.ova
+
+vagrant up || exit 1
+vagrant halt || exit 1
+vagrant package --out=hld/{{NAME}}.box || exit 1
+vagrant destroy -f
+
+cd hld
+tar -xf {{NAME}}.box
+tar -cf {{NAME}}.ova box.ovf box-disk1.vmdk
+
+cp {{NAME}}.ova ../
+cd $curdir
+rm -rf hld
+

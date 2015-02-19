@@ -1,0 +1,36 @@
+{
+    "stagingMethod": "ssh",
+    "staging": "staging-server",
+    "stagingUser": "hpccbuild",
+    "buildDir": "/u/tBuilds",
+    "baseName": "HPCCSystemsVM-amd64",
+    "packageBase": "hpccsystems-platform_community",
+    "packagePost": "precise_amd64.deb",
+    "optional_packages": [
+       {"name": "ganglia-monitoring",
+        "packageDir": "bin/ganglia-monitoring",
+        "packageBase": "hpccsystems-ganglia-monitoring",
+        "packageKey": "gm_package"
+       },
+       {"name": "nagios-monitoring",
+        "packageDir": "bin/nagios-monitoring",
+        "packageBase": "hpccsystems-nagios-monitoring",
+        "packageKey": "nm_package"
+       }
+    ],
+    "replace":{
+        "{{NAME}}": "name",
+        "{{PACKAGE}}": "package",
+        "{{VERSION}}": "version",
+        "{{GM_PACKAGE}}": "gm_package",
+        "{{NM_PACKAGE}}": "nm_package"
+    },
+    "templates": [
+        "build.sh.in",
+        "provision.sh.in",
+        "amd64/Vagrantfile.in"
+    ],
+    "extra_templates": [
+        { "packages": "amd64/Vagrantfile.in" }
+    ]
+}
