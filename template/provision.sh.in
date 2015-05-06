@@ -30,7 +30,9 @@ R CMD INSTALL ${RInsideName}.tar.gz
 rm -rf ${RInsideName}.tar.gz
 
 dpkg -i /vagrant/{{PACKAGE}}
+#apt-get -f install
 apt-get clean > /dev/null
+
 
 
 
@@ -39,10 +41,14 @@ apt-get clean > /dev/null
 if [ -e /vagrant/{{GM_PACKAGE}} ]
 then
     apt-get update
-    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad ganglia-monitor-python
+    sleep 1
+    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad
+    sleep 1
+    apt-get insteall -y ganglia-monitor-python
     sleep 1
     #wget http://10.176.32.10/data3/gleb/$gm_package
     dpkg -i /vagrant/{{GM_PACKAGE}}
+    #apt-get -f install
     apt-get clean > /dev/null
     rm -rf $gm_package
     git clone https://github.com/garonsky/ganglia-monitoring.git
@@ -61,6 +67,7 @@ then
     sleep 1
     apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server
     sleep 1
+    #apt-get -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i /vagrant/{{NM_PACKAGE}}
