@@ -23,7 +23,7 @@
         "packageDir": "bin/wssql",
         "packageBase": "hpccsystems-wssql",
         "packageKey": "wssql_package",
-        "packageRootDir": "WSSQL-RJP"
+        "packageRootDir": "WSSQL"
        }
 
     ],
