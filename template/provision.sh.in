@@ -44,7 +44,13 @@ then
     sleep 1
     apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad
     sleep 1
-    apt-get insteall -y ganglia-monitor-python
+    # apt-cache search ganglia-monitor-python cannot find it.
+    # apt-get insteall -y ganglia-monitor-python
+    # workaround:
+    wget  http://10.176.32.10/data3/software/ganglia/ganglia-monitor-python_3.6.0-5ubuntu1_all.deb
+    dpkg -i ganglia-monitor-python_3.6.0-5ubuntu1_all.deb
+    rm -rf ganglia-monitor-python_3.6.0-5ubuntu1_all.deb
+
     sleep 1
     #wget http://10.176.32.10/data3/gleb/$gm_package
     dpkg -i /vagrant/{{GM_PACKAGE}}
