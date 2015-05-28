@@ -134,7 +134,7 @@ do
   fi
   scp -i ~/.ssh/hpcc_key_pair ${staging}/CE-Candidate-${version}/bin/vm/${original_ova} ${work_dir}/${arch}/
 
-  ${sikuli_home}/runScript -c -r ${VMX_SCRIPT_DIR}/sikuli/create_vmx_ova.sikuli 
+  ${sikuli_home}/runScript -c -r ${VMX_SCRIPT_DIR}/Linux.sikuli/create_vmx_ova.sikuli 
   scp -i ~/.ssh/hpcc_key_pair  ${work_dir}/$arch/work/*.ova ${staging}/CE-Candidate-${version}/bin/vm/
   
   mv /tmp/create_vmx_ova.log ${work_dir}/${arch}/
