@@ -86,7 +86,7 @@ fi
 # Install/configure WSSQL Components
 if [ -e /vagrant/{{WSSQL_PACKAGE}} ]
 then
-    dpkg -i /vagrant/{{WSSQL_PACKAGE}}
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{WSSQL_PACKAGE}}
     wget http://10.176.32.10/data3/VM/environment.xml 
     cp environment.xml /etc/HPCCSystems/
     cp environment.xml /etc/HPCCSystems/source/
