@@ -53,7 +53,7 @@ then
 
     sleep 1
     #wget http://10.176.32.10/data3/gleb/$gm_package
-    dpkg -i /vagrant/{{GM_PACKAGE}}
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{GM_PACKAGE}}
     apt-get -f install
     apt-get clean > /dev/null
     rm -rf $gm_package
@@ -76,7 +76,8 @@ then
     apt-get -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
-    dpkg -i /vagrant/{{NM_PACKAGE}}
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
+/vagrant/{{WSSQL_PACKAGE}}
     /opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_services.cfg
     /opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
     /etc/init.d/nagios-nrpe-server restart
