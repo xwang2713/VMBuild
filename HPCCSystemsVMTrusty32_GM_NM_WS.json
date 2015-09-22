@@ -1,0 +1,46 @@
+{
+    "stagingMethod": "ssh",
+    "staging": "staging-server",
+    "stagingUser": "hpccbuild",
+    "buildDir": "/u/tBuilds",
+    "baseName": "HPCCSystemsVM",
+    "packageBase": "hpccsystems-platform-community",
+    "packagePost": "trusty_i386.deb",
+    "optional_packages": [
+       {"name": "ganglia-monitoring", 
+        "packageDir": "bin/ganglia-monitoring", 
+        "packageBase": "hpccsystems-ganglia-monitoring",
+        "packageKey": "gm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "nagios-monitoring",
+        "packageDir": "bin/nagios-monitoring",
+        "packageBase": "hpccsystems-nagios-monitoring",
+        "packageKey": "nm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "wssql",
+        "packageDir": "bin/wssql",
+        "packageBase": "hpccsystems-wssql",
+        "packageKey": "wssql_package",
+        "packageRootDir": "WSSQL"
+       }
+
+    ],
+    "replace":{
+        "{{NAME}}": "name",
+        "{{PACKAGE}}": "package",
+        "{{VERSION}}": "version",
+        "{{GM_PACKAGE}}": "gm_package",
+        "{{NM_PACKAGE}}": "nm_package",
+        "{{WSSQL_PACKAGE}}": "wssql_package"
+    },
+    "templates": [
+        "build.sh.in",
+        "trusty/provision.sh.in",
+        "trusty/i386/Vagrantfile.in"
+    ],
+    "extra_templates": [
+        { "packages": "trusty/i386/Vagrantfile.in" }
+    ]
+}

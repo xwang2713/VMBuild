@@ -1,49 +1,62 @@
 export DEBIAN_FRONTEND=noninteractive
 arch=$(arch)
 VM_HOSTNAME="{{NAME}}"
-apt-get update > /dev/null
+apt-get update --fix-missing > /dev/null
 #apt-get upgrade -y
-apt-get install -y linux-headers-3.2.0-37-generic build-essential dkms
+apt-get install -y -o Acquire::Retries=5 linux-headers-3.13.0-24-generic build-essential dkms --fix-missing
 
-apt-get install -y xserver-xorg
+apt-get install -y -o Acquire::Retries=5 xserver-xorg --fix-missing
+apt-get -y -f install
 
 # will have 200 MB
 #apt-get install -y lxde
 
-apt-get install -y openbox
+apt-get install -y -o Acquire::Retries=5 openbox --fix-missing
 #startx to start X Windows
-apt-get install -y xinit
+apt-get install -y -o Acquire::Retries=5 xinit --fix-missing
 
 sleep 1
-apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1
-
+apt-get install -y -o Acquire::Retries=5 libboost-regex1.54.0 libicu52 libxslt1.1 libxerces-c3.1 --fix-missing
 sleep 1
+apt-get install -y -o Acquire::Retries=5 g++ expect libarchive13 openjdk-7-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+sleep 1
+
+apt-get -y -f install
+
 
 # Download and install Rcpp and RInside
 # RInside 0.2.11 require Rccp 0.11.x which need to be tested.
-#RInsideName=RInside_0.2.11
+#RInsideName=RInside_0.2.12
 #wget http://cran.r-project.org/src/contrib/${RInsideName}.tar.gz
 
-RInsideName=RInside_0.2.10
+RInsideName=RInside_0.2.12
 wget http://10.176.32.10/builds/software/R/${RInsideName}.tar.gz
 R CMD INSTALL ${RInsideName}.tar.gz
 rm -rf ${RInsideName}.tar.gz
 
 dpkg -i /vagrant/{{PACKAGE}}
-#apt-get -f install
+apt-get -y -f install
+apt-get autoremove 
 apt-get clean > /dev/null
-
-
 
 
 # Install/configure Ganglia Components
 # Get prerequisites
 if [ -e /vagrant/{{GM_PACKAGE}} ]
 then
-    apt-get update
+    #apt-get update
+    #sleep 1
+    apt-get install -y  -o Acquire::Retries=5 ganglia-monitor python-lxml libltdl7 libganglia1 --fix-missing
     sleep 1
-    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad
+    apt-get install -y  -o Acquire::Retries=5 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad --fix-missing
+    apt-get -y -f install
     sleep 1
+    apt-get install -y  -o Acquire::Retries=5 collectd-core  --fix-missing
+    sleep 1
+    apt-get install -y  -o Acquire::Retries=5 ganglia-monitor-python --fix-missing
+    sleep 1
+    apt-get -y -f install
+
     # apt-cache search ganglia-monitor-python cannot find it.
     # apt-get insteall -y ganglia-monitor-python
     # workaround:
@@ -71,9 +84,9 @@ if [ -e /vagrant/{{NM_PACKAGE}} ]
 then
     apt-get update
     sleep 1
-    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server
+    apt-get install -y -o Acquire::Retries=5 nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
     sleep 1
-    apt-get -f install
+    apt-get -y -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
