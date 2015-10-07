@@ -3,19 +3,22 @@ arch=$(arch)
 VM_HOSTNAME="{{NAME}}"
 apt-get update > /dev/null
 #apt-get upgrade -y
-apt-get install -y linux-headers-3.2.0-37-generic build-essential dkms
+apt-get install -y linux-headers-3.2.0-37-generic build-essential dkms --fix-missing
 
-apt-get install -y xserver-xorg
+apt-get install -y xserver-xorg --fix-missing
+apt-get -y -f install
 
 # will have 200 MB
 #apt-get install -y lxde
 
-apt-get install -y openbox
+apt-get install -y openbox --fix-missing
 #startx to start X Windows
-apt-get install -y xinit
+apt-get install -y xinit --fix-missing
+apt-get -y -f install
 
 sleep 1
-apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1
+apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+apt-get -y -f install
 
 sleep 1
 
@@ -42,7 +45,8 @@ if [ -e /vagrant/{{GM_PACKAGE}} ]
 then
     apt-get update
     sleep 1
-    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad
+    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad --fix-missing
+    apt-get -y -f install
     sleep 1
     # apt-cache search ganglia-monitor-python cannot find it.
     # apt-get insteall -y ganglia-monitor-python
@@ -71,9 +75,9 @@ if [ -e /vagrant/{{NM_PACKAGE}} ]
 then
     apt-get update
     sleep 1
-    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server
+    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
     sleep 1
-    apt-get -f install
+    apt-get -y -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
