@@ -18,7 +18,7 @@ apt-get install -y -o Acquire::Retries=5 xinit --fix-missing
 sleep 1
 apt-get install -y -o Acquire::Retries=5 libboost-regex1.54.0 libicu52 libxslt1.1 libxerces-c3.1 --fix-missing
 sleep 1
-apt-get install -y -o Acquire::Retries=5 g++ expect libarchive13 openjdk-7-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+apt-get install -y -o Acquire::Retries=5 g++ expect libarchive13 openjdk-7-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 libtbb2 --fix-missing
 sleep 1
 
 apt-get -y -f install
