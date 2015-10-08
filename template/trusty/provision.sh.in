@@ -27,6 +27,8 @@ then
     git clone https://github.com/garonsky/ganglia-monitoring.git
     workDir=$(pwd)
     cd ganglia-monitoring/vm_precise
+    sed -i 's/VM Cluster/VM_Cluster/g' vm_precise/install_graphs_helper.sh
+    sed -i 's/VM Demo/VM_Demo/g' vm_precise/gmond.conf
     ./install_graphs_helper.sh
     cd $workdir
     rm -rf ganglia-monitoring
