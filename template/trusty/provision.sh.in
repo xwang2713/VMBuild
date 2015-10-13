@@ -44,11 +44,8 @@ then
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
-    /opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
-    /opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -enable_host_notify -enable_service_notify -set_url localhost/nagios3 -disable_check_all_disks -out /etc/nagios3/conf.d/hpcc_services.cfg
-    /opt/HPCCSystems/bin/hpcc-nagios-tools -ec -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_escalations.cfg
-    /etc/init.d/nagios-nrpe-server restart
-    /etc/init.d/nagios3 restart
+
+    # Moved rest Nagios configuration to rc.local
 fi
 
 # Install/configure WSSQL Components
@@ -122,6 +119,14 @@ IP=\$(/usr/local/bin/get-ip-address)
 [ -z "\$IP" ] && dhclient eth1
 MODE="start"
 /etc/network/if-up.d/issue
+
+# Reconfigure Nagios
+/opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
+/opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -enable_host_notify -enable_service_notify -set_url localhost/nagios3 -disable_check_all_disks -out /etc/nagios3/conf.d/hpcc_services.cfg
+/opt/HPCCSystems/bin/hpcc-nagios-tools -ec -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_escalations.cfg
+/etc/init.d/nagios-nrpe-server restart
+/etc/init.d/nagios3 restart
+
 service hpcc-init start
 exit 0
 EOM
