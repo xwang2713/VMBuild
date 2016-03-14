@@ -37,10 +37,16 @@ class Config(object):
                                               )
 
     def optionalPackage(self, optPackageObj):
-        return "{base}-{version}{post}".format(base=optPackageObj['packageBase'],
-                                              version=optPackageObj['version'],
-                                              post=self.packagePost,
-                                              )
+        if optPackageObj['packageBase'].startswith("hpccsystems-plugin"):
+           return "{base}_{version}{post}".format(base=optPackageObj['packageBase'],
+                                                  version=optPackageObj['version'],
+                                                  post=self.packagePost,
+                                                 )
+        else:
+           return "{base}-{version}{post}".format(base=optPackageObj['packageBase'],
+                                                  version=optPackageObj['version'],
+                                                  post=self.packagePost,
+                                                  )
 
     @property
     def configDir(self):

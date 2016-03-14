@@ -6,10 +6,88 @@ apt-get -y -f install
 apt-get clean > /dev/null
 sleep 1
 
+apt-get install -y libtbb2
 
 dpkg -i /vagrant/{{PACKAGE}}
 apt-get -y -f install
 apt-get clean > /dev/null
+
+
+if [ -e /vagrant/{{CASSANDRAEMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{CASSANDRAEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{JAVAEMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{MEMCACHED_PACKAGE}} ]
+then
+    apt-get install -y libmemcache10 libmemcachedutil2
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{KAFKA_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{KAFKA_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{REDIS_PACKAGE}} ]
+then
+    apt-get install -y libhiredis0.10
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{REDIS_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{MYSQLEMBED_PACKAGE}} ]
+then
+    apt-get install -y libmysqlclient18
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MYSQLEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{SQLITE3EMBED_PACKAGE}} ]
+then
+    apt-get install -y libsqlite3-0
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQLITE3EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{PYEMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PYEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{V8EMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{V8EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
 
 
 # Install/configure Ganglia Components

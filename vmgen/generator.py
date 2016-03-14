@@ -15,6 +15,7 @@ class Generator(object):
 
         for optionalPackage in self.config.optional_packages:
 
+           #print ("optional package", optionalPackage)
            optionalPackageVersion ="{name}-version".format(name=optionalPackage['name'])
            #if (getattr(self.config, optionalPackageVersion) == None):
            #   self.config.addConfigItem("optPackageVersion", self.config.version)

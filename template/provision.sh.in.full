@@ -3,6 +3,34 @@ arch=$(arch)
 VM_HOSTNAME="{{NAME}}"
 apt-get update > /dev/null
 #apt-get upgrade -y
+apt-get install -y linux-headers-3.2.0-37-generic build-essential dkms --fix-missing
+
+apt-get install -y xserver-xorg --fix-missing
+apt-get -y -f install
+
+# will have 200 MB
+#apt-get install -y lxde
+
+apt-get install -y openbox --fix-missing
+#startx to start X Windows
+apt-get install -y xinit --fix-missing
+apt-get -y -f install
+
+sleep 1
+apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+apt-get -y -f install
+
+sleep 1
+
+# Download and install Rcpp and RInside
+# RInside 0.2.11 require Rccp 0.11.x which need to be tested.
+#RInsideName=RInside_0.2.11
+#wget http://cran.r-project.org/src/contrib/${RInsideName}.tar.gz
+
+RInsideName=RInside_0.2.10
+wget http://10.176.32.10/builds/software/R/${RInsideName}.tar.gz
+R CMD INSTALL ${RInsideName}.tar.gz
+rm -rf ${RInsideName}.tar.gz
 
 dpkg -i /vagrant/{{PACKAGE}}
 #apt-get -f install
@@ -15,6 +43,12 @@ apt-get clean > /dev/null
 # Get prerequisites
 if [ -e /vagrant/{{GM_PACKAGE}} ]
 then
+    apt-get update
+    sleep 1
+    apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad --fix-missing
+    sleep 1
+    apt-get -f install
+    sleep 1
     # apt-cache search ganglia-monitor-python cannot find it.
     # apt-get insteall -y ganglia-monitor-python
     # workaround:
@@ -22,6 +56,7 @@ then
     #dpkg -i ganglia-monitor-python_3.6.0-5ubuntu1_all.deb
     #rm -rf ganglia-monitor-python_3.6.0-5ubuntu1_all.deb
 
+    sleep 1
     #wget http://10.176.32.10/data3/gleb/$gm_package
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{GM_PACKAGE}}
     apt-get -y -f install
@@ -31,10 +66,8 @@ then
     git clone https://github.com/garonsky/ganglia-monitoring.git
     workDir=$(pwd)
     cd ganglia-monitoring/vm_precise
-    sed -i 's/VM Cluster/VM_Cluster/g' install_graphs_helper.sh
-    sed -i 's/VM Demo/VM_Demo/g' gmond.conf
     ./install_graphs_helper.sh
-    cd $workDir
+    cd $workdir
     rm -rf ganglia-monitoring
 fi
 
@@ -42,10 +75,19 @@ fi
 # Get prerequisites
 if [ -e /vagrant/{{NM_PACKAGE}} ]
 then
+    apt-get update
+    sleep 1
+    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
+    sleep 1
+    apt-get -y -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
-    # Move rest configuration to rc.local
+    /opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
+    /opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -enable_host_notify -enable_service_notify -set_url localhost/nagios3 -disable_check_all_disks -out /etc/nagios3/conf.d/hpcc_services.cfg
+    /opt/HPCCSystems/bin/hpcc-nagios-tools -ec -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_escalations.cfg
+    /etc/init.d/nagios-nrpe-server restart
+    /etc/init.d/nagios3 restart
 fi
 
 # Install/configure WSSQL Components
@@ -119,14 +161,6 @@ IP=\$(/usr/local/bin/get-ip-address)
 [ -z "\$IP" ] && dhclient eth1
 MODE="start"
 /etc/network/if-up.d/issue
-
-# Re-config Nagios
-/opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
-/opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -enable_host_notify -enable_service_notify -set_url localhost/nagios3 -disable_check_all_disks -out /etc/nagios3/conf.d/hpcc_services.cfg
-/opt/HPCCSystems/bin/hpcc-nagios-tools -ec -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_escalations.cfg
-/etc/init.d/nagios-nrpe-server restart
-/etc/init.d/nagios3 restart
-
 service hpcc-init start
 exit 0
 EOM
