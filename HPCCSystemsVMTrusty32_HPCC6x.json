@@ -19,22 +19,10 @@
         "packageKey": "nm_package",
         "packageRootDir": "CE-Candidate-"
        },
-       {"name": "cassandraembed",
-        "packageDir": "bin/plugins",
-        "packageBase": "hpccsystems-plugin-cassandraembed",
-        "packageKey": "cassandraembed_package",
-        "packageRootDir": "CE-Candidate-"
-       },
        {"name": "javaembed",
         "packageDir": "bin/plugins",
         "packageBase": "hpccsystems-plugin-javaembed",
         "packageKey": "javaembed_package",
-        "packageRootDir": "CE-Candidate-"
-       },
-       {"name": "memcached",
-        "packageDir": "bin/plugins",
-        "packageBase": "hpccsystems-plugin-memcached",
-        "packageKey": "memcached_package",
         "packageRootDir": "CE-Candidate-"
        },
        {"name": "kafka",
@@ -88,7 +76,6 @@
         "{{GM_PACKAGE}}": "gm_package",
         "{{NM_PACKAGE}}": "nm_package",
         "{{WSSQL_PACKAGE}}": "wssql_package",
-        "{{CASSANDRAEMBED_PACKAGE}}": "cassandraembed_package",
         "{{JAVAEMBED_PACKAGE}}": "javaembed_package",
         "{{KAFKA_PACKAGE}}": "kafka_package",
         "{{REDIS_PACKAGE}}": "redis_package",

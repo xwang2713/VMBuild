@@ -13,14 +13,6 @@ apt-get -y -f install
 apt-get clean > /dev/null
 
 
-if [ -e /vagrant/{{CASSANDRAEMBED_PACKAGE}} ]
-then
-    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{CASSANDRAEMBED_PACKAGE}}
-    apt-get -y -f install
-    apt-get clean > /dev/null
-    sleep 1
-fi
-
 if [ -e /vagrant/{{JAVAEMBED_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
