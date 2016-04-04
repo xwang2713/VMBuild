@@ -29,14 +29,14 @@ then
     sleep 1
 fi
 
-if [ -e /vagrant/{{MEMCACHED_PACKAGE}} ]
-then
-    apt-get install -y libmemcache10 libmemcachedutil2
-    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
-    apt-get -y -f install
-    apt-get clean > /dev/null
-    sleep 1
-fi
+#if [ -e /vagrant/{{MEMCACHED_PACKAGE}} ]
+#then
+#    apt-get install -y libmemcache10 libmemcachedutil2
+#    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
+#    apt-get -y -f install
+#    apt-get clean > /dev/null
+#    sleep 1
+#fi
 
 if [ -e /vagrant/{{KAFKA_PACKAGE}} ]
 then

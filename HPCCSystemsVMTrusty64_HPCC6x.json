@@ -91,7 +91,6 @@
         "{{WSSQL_PACKAGE}}": "wssql_package",
         "{{CASSANDRAEMBED_PACKAGE}}": "cassandraembed_package", 
         "{{JAVAEMBED_PACKAGE}}": "javaembed_package",
-        "{{MEMCACHED_PACKAGE}}": "memcached_package",
         "{{KAFKA_PACKAGE}}": "kafka_package",
         "{{REDIS_PACKAGE}}": "redis_package",
         "{{MYSQLEMBED_PACKAGE}}": "mysqlembed_package",
