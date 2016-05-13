@@ -17,8 +17,9 @@ apt-get install -y xinit --fix-missing
 apt-get -y -f install
 
 sleep 1
-apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-6-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+apt-get install -y libboost-regex1.46.1 libicu48 libxslt1.1 libxerces-c28 g++ expect libarchive12 openjdk-7-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
 apt-get -y -f install
+update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
 
 sleep 1
 
