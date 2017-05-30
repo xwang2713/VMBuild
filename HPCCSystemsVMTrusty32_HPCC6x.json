@@ -43,10 +43,22 @@
         "packageKey": "mysqlembed_package",
         "packageRootDir": "CE-Candidate-"
        },
-       {"name": "pyembed",
+       {"name": "py2embed",
         "packageDir": "bin/plugins",
-        "packageBase": "hpccsystems-plugin-pyembed",
-        "packageKey": "pyembed_package",
+        "packageBase": "hpccsystems-plugin-py2embed",
+        "packageKey": "py2embed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "py3embed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-py3embed",
+        "packageKey": "py3embed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "sqs",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-sqs",
+        "packageKey": "sqs_package",
         "packageRootDir": "CE-Candidate-"
        },
        {"name": "sqlite3embed",
@@ -81,7 +93,9 @@
         "{{REDIS_PACKAGE}}": "redis_package",
         "{{MYSQLEMBED_PACKAGE}}": "mysqlembed_package",
         "{{SQLITE3EMBED_PACKAGE}}": "sqlite3embed_package",
-        "{{PYEMBED_PACKAGE}}": "pyembed_package",
+        "{{PY2EMBED_PACKAGE}}": "py2embed_package",
+        "{{PY3EMBED_PACKAGE}}": "py3embed_package",
+        "{{SQS_PACKAGE}}": "sqs_package",
         "{{V8EMBED_PACKAGE}}": "v8embed_package"
     },
     "templates": [

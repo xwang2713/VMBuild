@@ -65,9 +65,25 @@ then
     sleep 1
 fi
 
-if [ -e /vagrant/{{PYEMBED_PACKAGE}} ]
+if [ -e /vagrant/{{PY2EMBED_PACKAGE}} ]
 then
-    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PYEMBED_PACKAGE}}
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY2EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{PY2EMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY2EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{SQS_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQS_PACKAGE}}
     apt-get -y -f install
     apt-get clean > /dev/null
     sleep 1
