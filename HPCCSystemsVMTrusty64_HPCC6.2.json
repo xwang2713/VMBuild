@@ -1,0 +1,103 @@
+{
+    "stagingMethod": "ssh",
+    "staging": "staging-server",
+    "stagingUser": "hpccbuild",
+    "buildDir": "/u/tBuilds",
+    "baseName": "HPCCSystemsVM-amd64",
+    "packageBase": "hpccsystems-platform-community",
+    "packagePost": "trusty_amd64.deb",
+    "optional_packages": [
+       {"name": "ganglia-monitoring",
+        "packageDir": "bin/ganglia-monitoring",
+        "packageBase": "hpccsystems-ganglia-monitoring",
+        "packageKey": "gm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "nagios-monitoring",
+        "packageDir": "bin/nagios-monitoring",
+        "packageBase": "hpccsystems-nagios-monitoring",
+        "packageKey": "nm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "javaembed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-javaembed",
+        "packageKey": "javaembed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "kafka",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-kafka",
+        "packageKey": "kafka_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "redis",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-redis",
+        "packageKey": "redis_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "mysqlembed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-mysqlembed",
+        "packageKey": "mysqlembed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "pyembed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-pyembed",
+        "packageKey": "pyembed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "sqs",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-sqs",
+        "packageKey": "sqs_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "sqlite3embed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-sqlite3embed",
+        "packageKey": "sqlite3embed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "v8embed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-v8embed",
+        "packageKey": "v8embed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+
+       {"name": "wssql",
+        "packageDir": "bin/wssql",
+        "packageBase": "hpccsystems-wssql",
+        "packageKey": "wssql_package",
+        "packageRootDir": "CE-Candidate-"
+       }
+
+    ],
+    "replace":{
+        "{{NAME}}": "name",
+        "{{PACKAGE}}": "package",
+        "{{VERSION}}": "version",
+        "{{GM_PACKAGE}}": "gm_package",
+        "{{NM_PACKAGE}}": "nm_package",
+        "{{WSSQL_PACKAGE}}": "wssql_package",
+        "{{JAVAEMBED_PACKAGE}}": "javaembed_package",
+        "{{KAFKA_PACKAGE}}": "kafka_package",
+        "{{REDIS_PACKAGE}}": "redis_package",
+        "{{MYSQLEMBED_PACKAGE}}": "mysqlembed_package",
+        "{{SQLITE3EMBED_PACKAGE}}": "sqlite3embed_package",
+        "{{PYEMBED_PACKAGE}}": "pyembed_package",
+        "{{SQS_PACKAGE}}": "sqs_package",
+        "{{V8EMBED_PACKAGE}}": "v8embed_package"
+    },
+    "templates": [
+        "build.sh.in",
+        "trusty/provision.sh.in",
+        "trusty/amd64/Vagrantfile.in"
+    ],
+    "extra_templates": [
+        { "packages": "trusty/amd64/Vagrantfile.in" }
+    ]
+}
