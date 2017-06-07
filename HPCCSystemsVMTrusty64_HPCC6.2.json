@@ -49,12 +49,6 @@
         "packageKey": "pyembed_package",
         "packageRootDir": "CE-Candidate-"
        },
-       {"name": "sqs",
-        "packageDir": "bin/plugins",
-        "packageBase": "hpccsystems-plugin-sqs",
-        "packageKey": "sqs_package",
-        "packageRootDir": "CE-Candidate-"
-       },
        {"name": "sqlite3embed",
         "packageDir": "bin/plugins",
         "packageBase": "hpccsystems-plugin-sqlite3embed",
@@ -89,7 +83,6 @@
         "{{MYSQLEMBED_PACKAGE}}": "mysqlembed_package",
         "{{SQLITE3EMBED_PACKAGE}}": "sqlite3embed_package",
         "{{PYEMBED_PACKAGE}}": "pyembed_package",
-        "{{SQS_PACKAGE}}": "sqs_package",
         "{{V8EMBED_PACKAGE}}": "v8embed_package"
     },
     "templates": [
