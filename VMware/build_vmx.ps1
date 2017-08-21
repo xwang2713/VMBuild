@@ -56,7 +56,7 @@ $global:version = ${branch}.split("-")[0]
 $global:revision = ${branch}.split("-")[1]
 "version:$global:version, revision:$global:revision"
 $env:SCRIPT_DIR = split-path $myInvocation.MyCommand.path
-$global:staging = "hpccbuild@10.176.32.10:/data1/hpcc/builds"
+$global:staging = "hpccbuild@10.240.32.242:/data1/hpcc/builds"
 
 
 $ssh_key_file = ls ~/.ssh/hpcc_key_pair |  %{$_.FullName} 

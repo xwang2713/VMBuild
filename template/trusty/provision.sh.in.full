@@ -30,7 +30,7 @@ apt-get -y -f install
 #wget http://cran.r-project.org/src/contrib/${RInsideName}.tar.gz
 
 RInsideName=RInside_0.2.12
-wget http://10.176.32.10/builds/software/R/${RInsideName}.tar.gz
+wget http://10.240.32.242/builds/software/R/${RInsideName}.tar.gz
 R CMD INSTALL ${RInsideName}.tar.gz
 rm -rf ${RInsideName}.tar.gz
 
@@ -101,7 +101,7 @@ fi
 if [ -e /vagrant/{{WSSQL_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{WSSQL_PACKAGE}}
-    wget http://10.176.32.10/data3/VM/environment.xml 
+    wget http://10.240.32.242/data3/VM/environment.xml 
     cp environment.xml /etc/HPCCSystems/
     cp environment.xml /etc/HPCCSystems/source/
 fi
