@@ -6,7 +6,7 @@ apt-get -y -f install
 apt-get clean > /dev/null
 sleep 1
 
-apt-get install -y libtbb2 libatlas3-base
+apt-get install -y libtbb2 libatlas3-base python3.4 libpython3.4
 
 dpkg -i /vagrant/{{PACKAGE}}
 apt-get -y -f install
