@@ -5,7 +5,7 @@ apt-get update > /dev/null
 #apt-get upgrade -y
 apt-get install -y linux-headers-4.4.0-98-generic build-essential dkms --fix-missing
 
-apt-get install -y xserver-xorg --fix-missing
+apt-get install -y xserver-xorg xbitmaps xterm --fix-missing
 apt-get -y -f install
 
 # will need extra 200 MB
@@ -17,7 +17,7 @@ apt-get install -y xinit --fix-missing
 apt-get -y -f install
 
 sleep 1
-apt-get install -y libboost-regex1.58.0 libicu55 libxslt1.1 libxerces-c3.1 g++ expect libarchive13 openjdk-8-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 --fix-missing
+apt-get install -y libboost-regex1.58.0 libicu55 libxslt1.1 libxerces-c3.1 g++ expect libarchive13 openjdk-8-jdk r-base r-cran-rcpp libv8-dev git libapr1 libaprutil1 libmemcached11 libmemcachedutil2 libtbb2 libatlas3-base mysqlclient20 --fix-missing
 apt-get -y -f install
 
 RInsideName=RInside_0.2.12
@@ -31,7 +31,9 @@ rm -rf ${RInsideName}.tar.gz
 apt-get install -y  git ganglia-monitor python-lxml libltdl7 collectd-core libganglia1 libapr1 libconfuse0 libxslt1.1 libconfuse-common ganglia-webfrontend gmetad --fix-missing
 apt-get -f install
 
+apt-get install -y  -o Acquire::Retries=5 ganglia-webfrontend --fix-missing
+
 # Install/configure Nagios Components
 # Get prerequisites
-apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
+apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
 apt-get -y -f install

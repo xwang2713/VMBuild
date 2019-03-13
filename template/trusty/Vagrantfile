@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network :forwarded_port, guest: 8010, host: 8010
+  config.vm.network :private_network, type: :dhcp
+
+  config.vm.hostname = "hpcc-trusty64"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "hpcc-trusty64"
+    vb.customize ["modifyvm", :id, "--memory", "1536"]
+  end
+  config.vm.provision :shell, :path => "provision.base.sh"
+end
+
