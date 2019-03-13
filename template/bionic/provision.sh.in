@@ -1,0 +1,243 @@
+export DEBIAN_FRONTEND=noninteractive
+arch=$(arch)
+VM_HOSTNAME="{{NAME}}"
+apt-get update > /dev/null
+apt-get -y -f install
+apt-get clean > /dev/null
+sleep 1
+
+apt-get install -y libtbb2 libatlas3-base python3.4 libpython3.4
+
+dpkg -i /vagrant/{{PACKAGE}}
+apt-get -y -f install
+apt-get clean > /dev/null
+
+
+if [ -e /vagrant/{{JAVAEMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{MEMCACHED_PACKAGE}} ]
+then
+    apt-get install -y libmemcache11 libmemcachedutil2
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{KAFKA_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{KAFKA_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{REDIS_PACKAGE}} ]
+then
+    apt-get install -y libhiredis0.13
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{REDIS_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{MYSQLEMBED_PACKAGE}} ]
+then
+    apt-get install -y libmysqlclient20
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MYSQLEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{SQLITE3EMBED_PACKAGE}} ]
+then
+    apt-get install -y libsqlite3-0
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQLITE3EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{PYEMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PYEMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{PY2EMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY2EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{PY3EMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY3EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{SQS_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQS_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+if [ -e /vagrant/{{V8EMBED_PACKAGE}} ]
+then
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{V8EMBED_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    sleep 1
+fi
+
+
+# Install/configure Ganglia Components
+# Get prerequisites
+if [ -e /vagrant/{{GM_PACKAGE}} ]
+then
+    # ganglia-webfrontend need configuration after install othewise reboot will
+    # prompt for authentification forever.
+    #apt-get install -y  -o Acquire::Retries=5 ganglia-webfrontend --fix-missing
+
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{GM_PACKAGE}}
+    apt-get -y -f install
+    apt-get clean > /dev/null
+    rm -rf $gm_package
+    git clone https://github.com/hpcc-systems/ganglia-monitoring.git
+    workDir=$(pwd)
+    cd ganglia-monitoring/vm_precise
+    sed -i 's/VM Cluster/VM_Cluster/g' install_graphs_helper.sh
+    sed -i 's/VM Demo/VM_Demo/g' gmond.conf
+    ./install_graphs_helper.sh
+    cd $workDir
+    rm -rf ganglia-monitoring
+
+    # Remove disk_total from ganglia metrix
+    sed -i "s/[,[[:space:]]*\"disk_total\"//g" /opt/HPCCSystems/componentfiles/files/ganglia/ganglia.json
+fi
+
+# Install/configure Nagios Components
+# Get prerequisites
+if [ -e /vagrant/{{NM_PACKAGE}} ]
+then
+    /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
+    /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
+    dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
+
+    # Moved rest Nagios configuration to rc.local
+fi
+
+sed -e "s/interface=\*/interface=eth1/" /etc/HPCCSystems/environment.conf > /tmp/environment.conf
+mv /tmp/environment.conf /etc/HPCCSystems/environment.conf
+
+cat > /usr/local/bin/get-ip-address << EOM
+#!/bin/sh
+
+i=0
+MAX_TRIAL=3
+interval=5
+RC=
+while [ \$i -lt \$MAX_TRIAL ] 
+do
+  i=\$(expr \$i \+ 1)
+  RC=\$(/sbin/ifconfig eth1 | grep "inet addr" | grep -v "127.0.0.1" | awk '{ print \$2 }' | awk -F: '{ print \$2 }')
+  [ -n "\$RC" ] && break 
+  sleep \$interval
+done
+echo \$RC
+EOM
+chmod a+x /usr/local/bin/get-ip-address
+
+cat > /etc/issue-standard << EOM
+Welcome to the HPCC Platform VM Version {{VERSION}}!
+
+Please use the following credentials to login to the shell.
+
+User: hpccdemo
+Pass: hpccdemo
+
+(This user has full passwordless sudo rights.)
+
+EclWatch: http://%IP%:8010
+
+
+EOM
+
+cat > /etc/network/if-up.d/issue << EOM
+#!/bin/sh
+if [ "\$METHOD" = loopback ]; then
+    exit 0
+fi
+
+# Only run from ifup.
+if [ "\$MODE" != start ]; then
+    exit 0
+fi
+
+IP=\`/usr/local/bin/get-ip-address\`
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/issue
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/motd
+
+hostname ${VM_HOSTNAME}
+EOM
+chmod a+x /etc/network/if-up.d/issue
+
+cat > /etc/rc.local << EOM
+#!/bin/sh -e
+IP=\$(/usr/local/bin/get-ip-address)
+[ -z "\$IP" ] && dhclient eth1
+MODE="start"
+/etc/network/if-up.d/issue
+
+# Reconfigure Nagios
+/opt/HPCCSystems/bin/hpcc-nagios-tools -g -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_hostgroups.cfg
+/opt/HPCCSystems/bin/hpcc-nagios-tools -s -env /etc/HPCCSystems/environment.xml -enable_host_notify -enable_service_notify -set_url localhost/nagios3 -disable_check_all_disks -out /etc/nagios3/conf.d/hpcc_services.cfg
+/opt/HPCCSystems/bin/hpcc-nagios-tools -ec -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_escalations.cfg
+/opt/HPCCSystems/bin/hpcc-nagios-tools -t -env /etc/HPCCSystems/environment.xml -out /etc/nagios3/conf.d/hpcc_host.cfg
+/etc/init.d/nagios-nrpe-server restart
+/etc/init.d/nagios3 restart
+
+service hpcc-init start
+exit 0
+EOM
+
+# Uninstall GuestAdditions
+ls /opt/VBoxGuestAdditions*
+if [ $? -eq 0 ] 
+then
+   /opt/VBoxGuestAdditions*/uninstall.sh
+   rm -rf /opt/VBoxGuestAdditions*
+fi
+
+useradd -s /bin/bash -p "\$6\$TlToC1Ia\$rMHaPDzlX8RIn8t57vFClDpELs7/OuCvzzV.uuIFFOUhftDYaq7Z/VXOINuk1amkDGKo87A/bHzDzeyNOthRE1" hpccdemo
+mkdir /home/hpccdemo
+chown -R hpccdemo:hpccdemo /home/hpccdemo
+
+# Set up sudo
+( cat <<'EOP'
+%hpccdemo ALL=NOPASSWD:ALL
+EOP
+) > /tmp/hpccdemo
+chmod 0440 /tmp/hpccdemo
+mv /tmp/hpccdemo /etc/sudoers.d/
+
+
+sed -e "s/\(127\.0\.1\.1\).*/\1 ${VM_HOSTNAME}/" /etc/hosts > /tmp/host_tmp
+mv /tmp/host_tmp /etc/hosts
+chmod 644 /etc/hosts
+
