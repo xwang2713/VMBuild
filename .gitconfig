@@ -1,0 +1,13 @@
+[user]
+	name = xwang2713
+	email = xiaoming.wang@lexisnexis.com
+[core]
+   autocrlf = false
+   editor = vi
+[apply]
+#   whitespace = trailing-space,tab-in-indent
+#   whitespace = error
+[text]
+   eol = lf
+[push]
+	default = matching

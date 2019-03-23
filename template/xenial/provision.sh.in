@@ -22,7 +22,7 @@ fi
 
 if [ -e /vagrant/{{MEMCACHED_PACKAGE}} ]
 then
-    apt-get install -y libmemcache11 libmemcachedutil2
+    apt-get install -y libmemcached11 libmemcachedutil2
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
     apt-get -y -f install
     apt-get clean > /dev/null
@@ -145,7 +145,7 @@ sed -e "s/interface=\*/interface=enp0s8/" /etc/HPCCSystems/environment.conf > /t
 mv /tmp/environment.conf /etc/HPCCSystems/environment.conf
 
 cat > /usr/local/bin/get-ip-address << EOM
-#!/bin/bash
+#!/bin/sh
 
 i=0
 MAX_TRIAL=3
@@ -154,7 +154,7 @@ RC=
 while [ \$i -lt \$MAX_TRIAL ] 
 do
   i=\$(expr \$i \+ 1)
-  RC=\$(/sbin/ifconfig enp0s8 | grep "inet " | grep -v "127.0.0.1" | awk '{ print \$2 }' | awk -F: '{ print \$1 }')
+  RC=\$(/sbin/ifconfig enp0s8 | grep "inet addr" | grep -v "127.0.0.1" | awk '{ print \$2 }' | awk -F: '{ print \$2 }')
   [ -n "\$RC" ] && break 
   sleep \$interval
 done
@@ -178,7 +178,7 @@ EclWatch: http://%IP%:8010
 EOM
 
 cat > /etc/network/if-up.d/issue << EOM
-#!/bin/bash
+#!/bin/sh
 if [ "\$METHOD" = loopback ]; then
     exit 0
 fi
@@ -200,7 +200,7 @@ cat > /etc/rc.local << EOM
 #!/bin/sh -e
 IP=\$(/usr/local/bin/get-ip-address)
 [ -z "\$IP" ] && dhclient enp0s8
-export MODE="start"
+MODE="start"
 /etc/network/if-up.d/issue
 
 # Reconfigure Nagios
@@ -216,7 +216,6 @@ exit 0
 EOM
 
 chmod +x /etc/rc.local
-
 # Uninstall GuestAdditions
 ls /opt/VBoxGuestAdditions*
 if [ $? -eq 0 ] 
@@ -242,9 +241,3 @@ sed -e "s/\(127\.0\.1\.1\).*/\1 ${VM_HOSTNAME}/" /etc/hosts > /tmp/host_tmp
 mv /tmp/host_tmp /etc/hosts
 chmod 644 /etc/hosts
 
-# Prevent wait for network
-systemctl stop systemd-networkd-wait-online.service
-systemctl disable systemd-networkd-wait-online.service
-systemctl mask systemd-networkd-wait-online.service
-
-rm -rf /vagrant

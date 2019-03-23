@@ -7,7 +7,7 @@ mkdir hld
 
 vagrant up || exit 1
 vagrant halt || exit 1
-vagrant package --base hpcc-xenial64
+vagrant package --output hpcc-xenial64.box
 vagrant destroy -f
 
 #cd hld

@@ -3,12 +3,12 @@
     "staging": "staging-server",
     "stagingUser": "hpccbuild",
     "buildDir": "/u/tBuilds",
-    "baseName": "HPCCSystemsVM-amd64",
+    "baseName": "HPCCSystemsVM",
     "packageBase": "hpccsystems-platform-community",
-    "packagePost": "bionic_amd64.deb",
+    "packagePost": "bionic_i386.deb",
     "optional_packages": [
-       {"name": "ganglia-monitoring",
-        "packageDir": "bin/ganglia-monitoring",
+       {"name": "ganglia-monitoring", 
+        "packageDir": "bin/ganglia-monitoring", 
         "packageBase": "hpccsystems-ganglia-monitoring",
         "packageKey": "gm_package",
         "packageRootDir": "CE-Candidate-"
@@ -78,11 +78,11 @@
         "{{V8EMBED_PACKAGE}}": "v8embed_package"
     },
     "templates": [
-        "build.sh.in",
+        "bionic/build.sh.in",
         "bionic/provision.sh.in",
-        "bionic/amd64/Vagrantfile.in"
+        "bionic/i386/Vagrantfile.in"
     ],
     "extra_templates": [
-        { "packages": "bionic/amd64/Vagrantfile.in" }
+        { "packages": "bionic/i386/Vagrantfile.in" }
     ]
 }

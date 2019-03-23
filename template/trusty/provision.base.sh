@@ -44,5 +44,5 @@ apt-get install -y  -o Acquire::Retries=5 ganglia-webfrontend --fix-missing
 
 # Install/configure Nagios Components
 # Get prerequisites
-apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php build-essential libgd-dev nagios3 openssh-server --fix-missing
+apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
 apt-get -y -f install

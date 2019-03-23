@@ -78,7 +78,7 @@ if [ -e /vagrant/{{NM_PACKAGE}} ]
 then
     apt-get update
     sleep 1
-    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php5 build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
+    apt-get install -y nagios-nrpe-server apache2 libapache2-mod-php build-essential libgd2-xpm-dev nagios3 openssh-server --fix-missing
     sleep 1
     apt-get -y -f install
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin

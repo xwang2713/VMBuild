@@ -1,0 +1,19 @@
+#!/bin/bash
+
+curdir=`pwd`
+#mkdir hld
+
+rm -rf {{NAME}}.ova
+
+vagrant up || exit 1
+vagrant halt || exit 1
+
+#vagrant package --out=hld/{{NAME}}.box || exit 1
+
+#get shared foler name:
+#vboxmanage showvminfo {{NAME}}
+vboxmanage sharedfolder remove {{NAME}} --name vagrant
+vboxmanage export {{NAME}} -o {{NAME}}.ova --ovf10
+chmod 664 {{NAME}}.ova
+
+vagrant destroy -f

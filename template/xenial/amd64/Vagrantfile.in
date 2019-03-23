@@ -2,8 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  #config.vm.box = "ubuntu/trusty64"
-  config.vm.box = "hpcc-trusty64"
+  config.vm.box = "hpcc-xenial64"
   config.vm.network :forwarded_port, guest: 8010, host: 8010
   config.vm.network :private_network, type: :dhcp
 
