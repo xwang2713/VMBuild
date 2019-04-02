@@ -189,19 +189,20 @@ if [ "\$MODE" != start ]; then
 fi
 
 IP=\`/usr/local/bin/get-ip-address\`
-sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/issue
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/issue.in
 sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/motd.in
+
+version=\$(dpkg -l | grep hpccsystems-platform | awk '{print \$3}')
+sed -e "s/==VERSION==/\${version}/" /etc/issue.in > /etc/issue
+sed -e "s/==VERSION==/\${version}/" /etc/motd.in > /etc/motd 
 
 hostname ${VM_HOSTNAME}
 EOM
+
 chmod a+x /etc/network/if-up.d/issue
 
 cat > /etc/rc.local << EOM
 #!/bin/sh -e
-
-version=$(dpkg -l | grep hpccsystems-platform | awk '{print $3}')
-sed "s/==VERSION==/${version}" /etc/motd.in > /etc/motd 
-chmod 644 /etc/motd
 
 IP=\$(/usr/local/bin/get-ip-address)
 [ -z "\$IP" ] && dhclient enp0s8
