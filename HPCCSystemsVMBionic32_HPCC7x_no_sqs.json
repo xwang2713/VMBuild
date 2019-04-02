@@ -1,0 +1,81 @@
+{
+    "stagingMethod": "ssh",
+    "staging": "staging-server",
+    "stagingUser": "hpccbuild",
+    "buildDir": "/u/tBuilds",
+    "baseName": "HPCCSystemsVM",
+    "packageBase": "hpccsystems-platform-community",
+    "packagePost": "bionic_i386.deb",
+    "optional_packages": [
+       {"name": "ganglia-monitoring", 
+        "packageDir": "bin/ganglia-monitoring", 
+        "packageBase": "hpccsystems-ganglia-monitoring",
+        "packageKey": "gm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "nagios-monitoring",
+        "packageDir": "bin/nagios-monitoring",
+        "packageBase": "hpccsystems-nagios-monitoring",
+        "packageKey": "nm_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "javaembed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-javaembed",
+        "packageKey": "javaembed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "kafka",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-kafka",
+        "packageKey": "kafka_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "redis",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-redis",
+        "packageKey": "redis_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "mysqlembed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-mysqlembed",
+        "packageKey": "mysqlembed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "sqlite3embed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-sqlite3embed",
+        "packageKey": "sqlite3embed_package",
+        "packageRootDir": "CE-Candidate-"
+       },
+       {"name": "v8embed",
+        "packageDir": "bin/plugins",
+        "packageBase": "hpccsystems-plugin-v8embed",
+        "packageKey": "v8embed_package",
+        "packageRootDir": "CE-Candidate-"
+       }
+
+    ],
+    "replace":{
+        "{{NAME}}": "name",
+        "{{PACKAGE}}": "package",
+        "{{VERSION}}": "version",
+        "{{GM_PACKAGE}}": "gm_package",
+        "{{NM_PACKAGE}}": "nm_package",
+        "{{JAVAEMBED_PACKAGE}}": "javaembed_package",
+        "{{KAFKA_PACKAGE}}": "kafka_package",
+        "{{REDIS_PACKAGE}}": "redis_package",
+        "{{MYSQLEMBED_PACKAGE}}": "mysqlembed_package",
+        "{{SQLITE3EMBED_PACKAGE}}": "sqlite3embed_package",
+        "{{V8EMBED_PACKAGE}}": "v8embed_package"
+    },
+    "templates": [
+        "bionic/build.sh.in",
+        "bionic/provision.sh.in",
+        "bionic/i386/Vagrantfile.in"
+    ],
+    "extra_templates": [
+        { "packages": "bionic/i386/Vagrantfile.in" }
+    ]
+}
