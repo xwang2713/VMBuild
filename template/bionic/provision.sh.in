@@ -163,7 +163,7 @@ EOM
 chmod a+x /usr/local/bin/get-ip-address
 
 cat > /etc/issue-standard << EOM
-Welcome to the HPCC Platform VM Version {{VERSION}}!
+Welcome to the HPCC Platform VM Version ==VERSION==!
 
 Please use the following credentials to login to the shell.
 
@@ -190,7 +190,7 @@ fi
 
 IP=\`/usr/local/bin/get-ip-address\`
 sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/issue
-sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/motd
+sed -e "s;%IP%;\${IP};" /etc/issue-standard > /etc/motd.in
 
 hostname ${VM_HOSTNAME}
 EOM
@@ -198,6 +198,11 @@ chmod a+x /etc/network/if-up.d/issue
 
 cat > /etc/rc.local << EOM
 #!/bin/sh -e
+
+version=$(dpkg -l | grep hpccsystems-platform | awk '{print $3}')
+sed "s/==VERSION==/${version}" /etc/motd.in > /etc/motd 
+chmod 644 /etc/motd
+
 IP=\$(/usr/local/bin/get-ip-address)
 [ -z "\$IP" ] && dhclient enp0s8
 export MODE="start"
