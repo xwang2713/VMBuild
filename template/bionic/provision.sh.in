@@ -11,9 +11,16 @@ dpkg -i /vagrant/{{PACKAGE}}
 apt-get -y -f install
 apt-get clean > /dev/null
 
+cur_dir=$(pwd)
 
 if [ -e /vagrant/{{JAVAEMBED_PACKAGE}} ]
 then
+    if [ ! -e /usr/lib/jvm/default-java ]
+    then
+       cd /usr/lib/jvm
+       ln -s $(ls -d java-11-openjdk*) default-java
+       cd $cur_dir       
+    fi 
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
     apt-get -y -f install
     apt-get clean > /dev/null
