@@ -18,7 +18,7 @@ then
     if [ ! -e /usr/lib/jvm/default-java ]
     then
        cd /usr/lib/jvm
-       ln -s $(ls -d java-11-openjdk*) default-java
+       ln -s $(ls -d java-8-openjdk*) default-java
        cd $cur_dir       
     fi 
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
