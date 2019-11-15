@@ -15,12 +15,13 @@ cur_dir=$(pwd)
 
 if [ -e /vagrant/{{JAVAEMBED_PACKAGE}} ]
 then
-    if [ ! -e /usr/lib/jvm/default-java ]
-    then
+    #if [ ! -e /usr/lib/jvm/default-java ]
+    #then
+       rm -rf /usr/lib/jvm/default-java
        cd /usr/lib/jvm
-       ln -s $(ls -d java-8-openjdk*) default-java
+       ln -s $(ls -d java-11-openjdk*) default-java
        cd $cur_dir       
-    fi 
+    #fi 
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
     apt-get -y -f install
     apt-get clean > /dev/null
