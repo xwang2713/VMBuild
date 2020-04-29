@@ -145,7 +145,6 @@ then
     sed -i 's/VM Cluster/VM_Cluster/g' install_graphs_helper.sh
     sed -i 's/VM Demo/VM_Demo/g' gmond.conf
     ./install_graphs_helper.sh
-    rc=$(expr $? + $rc)
     cd $workDir
     rm -rf ganglia-monitoring
 
