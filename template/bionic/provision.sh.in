@@ -7,10 +7,18 @@ apt-get -y -f install
 apt-get clean > /dev/null
 sleep 1
 
+parse_return_code () 
+{
+  if [[ $1 -ne 0 ]]
+      rc=$(expr $1 + $rc)
+      echo "Error: $2" 
+  then
+  fi
+}
 
 dpkg -i /vagrant/{{PACKAGE}}
 apt-get -y -f install
-rc=$(expr $? + $rc)
+parse_return_code $? "install platform"
 apt-get clean > /dev/null
 
 cur_dir=$(pwd)
@@ -26,7 +34,7 @@ then
     #fi 
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{JAVAEMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install javaembed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -36,7 +44,7 @@ then
     apt-get install -y libmemcache11 libmemcachedutil2
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MEMCACHED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install memcached plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -45,7 +53,7 @@ if [ -e /vagrant/{{KAFKA_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{KAFKA_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install kafka plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -55,7 +63,7 @@ then
     apt-get install -y libhiredis0.13
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{REDIS_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install redis plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -65,7 +73,7 @@ then
     apt-get install -y libmysqlclient20
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{MYSQLEMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install mysqlembed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -75,7 +83,7 @@ then
     apt-get install -y libsqlite3-0
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQLITE3EMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install sqlite3embed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -84,7 +92,7 @@ if [ -e /vagrant/{{PYEMBED_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PYEMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install pyembed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -93,7 +101,7 @@ if [ -e /vagrant/{{PY2EMBED_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY2EMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install py2embed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -102,7 +110,7 @@ if [ -e /vagrant/{{PY3EMBED_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{PY3EMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install py3embed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -111,7 +119,7 @@ if [ -e /vagrant/{{SQS_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{SQS_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install sqs plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -120,7 +128,7 @@ if [ -e /vagrant/{{V8EMBED_PACKAGE}} ]
 then
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{V8EMBED_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install v8embed plugin"
     apt-get clean > /dev/null
     sleep 1
 fi
@@ -136,7 +144,7 @@ then
 
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{GM_PACKAGE}}
     apt-get -y -f install
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install ganglia-monitoring"
     apt-get clean > /dev/null
     rm -rf $gm_package
     git clone https://github.com/hpcc-systems/ganglia-monitoring.git
@@ -159,7 +167,7 @@ then
     /usr/sbin/useradd -m -s /bin/bash nagiosadmin -p nagiosadmin
     /usr/bin/htpasswd -b -c /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
     dpkg -i --ignore-depends=hpccsystems-platform /vagrant/{{NM_PACKAGE}}
-    rc=$(expr $? + $rc)
+    parse_return_code $? "install nagios-monitoring"
 
     # Moved rest Nagios configuration to rc.local
 fi
