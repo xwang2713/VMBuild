@@ -5,15 +5,20 @@ curdir=`pwd`
 
 rm -rf {{NAME}}.ova
 
-vagrant up || exit 1
-vagrant halt || exit 1
+vagrant up
+rc=$?
+vagrant halt
 
 #vagrant package --out=hld/{{NAME}}.box || exit 1
 
 #get shared foler name:
 #vboxmanage showvminfo {{NAME}}
 vboxmanage sharedfolder remove {{NAME}} --name vagrant
-vboxmanage export {{NAME}} -o {{NAME}}.ova --ovf10
-chmod 664 {{NAME}}.ova
+if [ $rc -eq 0 ]
+then
+  vboxmanage export {{NAME}} -o {{NAME}}.ova --ovf10
+  chmod 664 {{NAME}}.ova
+fi
 
 vagrant destroy -f
+[ $rc -ne 0 ] && exit 1

@@ -288,3 +288,4 @@ systemctl mask systemd-networkd-wait-online.service
 rm -rf /vagrant
 echo "rc=$rc"
 [ $rc -ne 0 ] && exit 1
+exit 0
