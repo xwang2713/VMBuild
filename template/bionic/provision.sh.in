@@ -6,13 +6,14 @@ apt-get update > /dev/null
 apt-get -y -f install
 apt-get clean > /dev/null
 sleep 1
+apt-get install -y libssl1.1
 
 parse_return_code () 
 {
   if [[ $1 -ne 0 ]]
-      rc=$(expr $1 + $rc)
-      echo "Error: $2" 
   then
+      echo "Error: $2" 
+      rc=$(expr $1 + $rc)
   fi
 }
 
@@ -285,4 +286,5 @@ systemctl disable systemd-networkd-wait-online.service
 systemctl mask systemd-networkd-wait-online.service
 
 rm -rf /vagrant
+echo "rc=$rc"
 [ $rc -ne 0 ] && exit 1
