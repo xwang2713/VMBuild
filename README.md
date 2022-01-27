@@ -15,6 +15,10 @@ Requirements
 
 Currently this code line is based around the HPCCSystems.com VM build process.
 
+Remember to set environment FILE_SERVER
+The current one should be 10.224.20.10
+For Jenkins it can be set for the agent (build server)
+
 Usage
 -----
 

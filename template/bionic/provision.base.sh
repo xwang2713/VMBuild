@@ -1,6 +1,6 @@
 export DEBIAN_FRONTEND=noninteractive
 arch=$(arch)
-FILE_SERVER=10.240.32.242
+#FILE_SERVER=10.224.20.10
 apt-get update > /dev/null
 #apt-get upgrade -y
 apt-get install -y linux-headers-$(uname -r) build-essential dkms --fix-missing
@@ -29,7 +29,7 @@ apt-get install -y git curl libapr1 libaprutil1 libtbb2 libatlas3-base libmemcac
 apt-get -y -f install
 
 RInsideName=RInside_0.2.14
-wget http://10.240.32.242/data3/software/R/${RInsideName}.tar.gz
+wget http://${FILE_SERVER}/data3/software/R/${RInsideName}.tar.gz
 R CMD INSTALL ${RInsideName}.tar.gz
 rm -rf ${RInsideName}.tar.gz
 

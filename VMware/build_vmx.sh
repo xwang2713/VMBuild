@@ -33,7 +33,7 @@ work_dir=/tmp/VMs
 VMWARE_DIR=~/vmware
 build_tag=
 all_arch=
-staging=hpccbuild@10.240.32.240:/data1/hpcc/builds
+staging=hpccbuild@${FILE_SERVER}:/data1/hpcc/builds
 sikuli_home=
 
 
